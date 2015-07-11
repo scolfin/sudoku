@@ -48,4 +48,9 @@ public class Square extends Axis {
 		return (index % 3) * 3;
 	}
 
+	@Override
+	public String toString() {
+		return "Square: " + super.toString();
+	}
+
 }

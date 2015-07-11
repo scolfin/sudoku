@@ -20,4 +20,9 @@ public class Column extends Axis {
 		return ret;
 	}
 
+	@Override
+	public String toString() {
+		return "Column: " + super.toString();
+	}
+
 }

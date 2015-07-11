@@ -16,7 +16,7 @@ public class Main {
 		Puzzle solution = null;
 		try {
 			if (args.length == 0) {
-				System.out.println("Falure! You must pass the file with the puzzles to solve!");
+				System.out.println("Failure! You must pass the file with the puzzles to solve!");
 				return;
 			}
 			Puzzle toSolve = loadPuzzleFromFile(args[0]);

@@ -6,6 +6,7 @@ import java.util.List;
 public abstract class Axis {
 	private final int [] m_axisContains;
 	private final Block[] m_axis;
+	private final String m_stringReper;
 
 	public Axis(Block[][] puzzle, int index) {
 		m_axis = getAxis(puzzle, index);
@@ -13,6 +14,7 @@ public abstract class Axis {
 		for (int i = 0; i < m_axis.length; i++) {
 			m_axisContains[m_axis[i].getSolution()] = i;
 		}
+		m_stringReper = String.valueOf(index);
 	}
 
 	boolean numberExists(int number) {
@@ -27,7 +29,7 @@ public abstract class Axis {
 			throw new InternalSolverException(ex);
 		}
 		if (m_axisContains[number] != -1 && m_axisContains[number] != position) {
-			throw new RuleViolationException("A solution can only apear once in an axis!");
+			throw new RuleViolationException("A solution can only appear once in an axis!");
 		}
 		m_axisContains[number] = position;
 	}
@@ -73,6 +75,11 @@ public abstract class Axis {
 			retArray[i] = -1;
 		}
 		return retArray;
+	}
+
+	@Override
+	public String toString() {
+		return m_stringReper;
 	}
 
 }
