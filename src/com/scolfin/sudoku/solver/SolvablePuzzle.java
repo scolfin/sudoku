@@ -17,6 +17,18 @@ class SolvablePuzzle extends Puzzle {
 	 */
 	boolean reduce() throws RuleViolationException, InternalSolverException {
 		int newSolutionCounter = 0;
+		newSolutionCounter = resetPossableSolutionsForAll(newSolutionCounter);
+		for (int i = 0; i < 9; ++i) {
+			newSolutionCounter += m_rows[i].findSinglePossableEntries(this);
+			newSolutionCounter = resetPossableSolutionsForAll(newSolutionCounter);
+			newSolutionCounter += m_columns[i].findSinglePossableEntries(this);
+			newSolutionCounter = resetPossableSolutionsForAll(newSolutionCounter);
+			newSolutionCounter += m_squares[i].findSinglePossableEntries(this);
+		}
+		return newSolutionCounter != 0;
+	}
+
+	private int resetPossableSolutionsForAll(int newSolutionCounter) throws InternalSolverException, RuleViolationException {
 		for (int i = 0; i < m_puzzle.length; ++i) {
 			for (int j = 0; j < m_puzzle[i].length; j++) {
 				Block b = m_puzzle[i][j];
@@ -26,11 +38,6 @@ class SolvablePuzzle extends Puzzle {
 				}
 			}
 		}
-		for (int i = 0; i < 9; ++i) {
-			newSolutionCounter += m_rows[i].findSinglePossableEntries(this);
-			newSolutionCounter += m_columns[i].findSinglePossableEntries(this);
-			newSolutionCounter += m_squares[i].findSinglePossableEntries(this);
-		}
-		return newSolutionCounter != 0;
+		return newSolutionCounter;
 	}
 }

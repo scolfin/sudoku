@@ -48,7 +48,7 @@ public class Block {
 			throw new RuleViolationException("The block you are trying to set already has a solution.");
 		}
 		if (!m_possableSolutions.contains(solutionValue)) {
-			throw new InternalSolverException("The solution you are trying to set is not in the collection of possable solutions to this block!");
+			throw new InternalSolverException("The solution you are trying to set is not in the collection of possible solutions to this block!");
 		}
 		m_solution = solutionValue;
 		m_possableSolutions.clear();
@@ -61,7 +61,7 @@ public class Block {
 		if (isSolved()) {
 			return;
 		}
-		resetPotentialSolutions();
+		resetPossibleSolutions();
 		Axis row = puzzle.getRow(m_row);
 		Axis column = puzzle.getColumn(m_column);
 		Axis square = puzzle.getSquare(getSquareIndex());
@@ -77,7 +77,7 @@ public class Block {
 				numberExists = true;
 			}
 			if (!numberExists) {
-				addPossableSolution(i);
+				addPossibleSolution(i);
 			}
 		}
 		if (m_possableSolutions.isEmpty()) {
@@ -85,11 +85,11 @@ public class Block {
 		}
 	}
 
-	protected void addPossableSolution(int i) {
+	protected void addPossibleSolution(int i) {
 		m_possableSolutions.add(i);
 	}
 
-	protected void resetPotentialSolutions() {
+	protected void resetPossibleSolutions() {
 		m_possableSolutions.clear();
 	}
 

@@ -40,17 +40,17 @@ public abstract class Axis {
 	 */
 	public int findSinglePossableEntries(final Puzzle puzzle) throws InternalSolverException, RuleViolationException {
 		int foundSolution = 0;
-		final List<ArrayList<Block>> matches = new ArrayList<ArrayList<Block>>(10);
+		final List<ArrayList<Block>> matches = new ArrayList<>(10);
 		for (int i = 0; i < 10; ++i) {
-			matches.add(new ArrayList<Block>());
+			matches.add(new ArrayList<>());
 		}
 		for (final Block b : m_axis) {
 			if (!b.isSolved()) {
-				final List<Integer> possableSolutions = new ArrayList<Integer>(b.getPossableSolutions());
-				b.resetPotentialSolutions();
-				for (Integer possableSolution : possableSolutions) {
-					matches.get(possableSolution).add(b);
-					b.addPossableSolution(possableSolution);
+				final List<Integer> possibleSolutions = new ArrayList<>(b.getPossableSolutions());
+				b.resetPossibleSolutions();
+				for (Integer possibleSolution : possibleSolutions) {
+					matches.get(possibleSolution).add(b);
+					b.addPossibleSolution(possibleSolution);
 				}
 			}
 		}
@@ -68,7 +68,7 @@ public abstract class Axis {
 
 	protected abstract int getPosition(final int row, final int column) throws IndexOutOfBoundsException;
 	protected abstract Block[] getAxis(Block[][] puzzle, int index);
-	
+
 	private static int[] getInitialAxisContCacheArray() {
 		final int[] retArray = new int[10];
 		for (int i = 0; i < retArray.length; ++i) {
