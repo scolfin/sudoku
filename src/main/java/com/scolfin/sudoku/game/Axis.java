@@ -3,6 +3,9 @@ package com.scolfin.sudoku.game;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Row or column of a puzzle
+ */
 public abstract class Axis {
 	private final int [] m_axisContains;
 	private final Block[] m_axis;
@@ -35,19 +38,19 @@ public abstract class Axis {
 	}
 	
 	
-	/*
+	/**
 	 *  Looks at the axis for only one values that can only appear in one place on that axis and fills it in.
 	 */
-	public int findSinglePossableEntries(final Puzzle puzzle) throws InternalSolverException, RuleViolationException {
+	public int findSinglePossibleEntries(final Puzzle puzzle) throws InternalSolverException, RuleViolationException {
 		int foundSolution = 0;
 		final List<ArrayList<Block>> matches = new ArrayList<>(10);
 		for (int i = 0; i < 10; ++i) {
 			matches.add(new ArrayList<>());
 		}
 		for (final Block b : m_axis) {
+			final List<Integer> possibleSolutions = new ArrayList<>(b.getPossableSolutions());
+			b.resetPossibleSolutions();
 			if (!b.isSolved()) {
-				final List<Integer> possibleSolutions = new ArrayList<>(b.getPossableSolutions());
-				b.resetPossibleSolutions();
 				for (Integer possibleSolution : possibleSolutions) {
 					matches.get(possibleSolution).add(b);
 					b.addPossibleSolution(possibleSolution);

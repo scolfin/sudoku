@@ -1,5 +1,8 @@
 package com.scolfin.sudoku.game;
 
+/**
+ * One of the 3x3 blocks in the puzzle
+ */
 public class Square extends Axis {
 
 	private int m_startRow;

@@ -3,15 +3,18 @@ package com.scolfin.sudoku.game;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Single cell of the puzzle
+ */
 public class Block {
 	
-	private final List<Integer> m_possableSolutions;
+	private final List<Integer> m_possibleSolutions;
 	private int m_solution;
 	private final int m_row;
 	private final int m_column;
 	
 	public Block(int value, int row, int column) {
-		m_possableSolutions = new ArrayList<Integer>();
+		m_possibleSolutions = new ArrayList<>();
 		m_solution = value;
 		m_row = row;
 		m_column = column;
@@ -29,9 +32,9 @@ public class Block {
 		if (isSolved()) {
 			return false;
 		}
-		if (m_possableSolutions.size() == 1) {
-			m_solution = m_possableSolutions.get(0);
-			m_possableSolutions.clear();
+		if (m_possibleSolutions.size() == 1) {
+			m_solution = m_possibleSolutions.get(0);
+			m_possibleSolutions.clear();
 			puzzle.getRow(m_row).setNumberExists(m_solution, m_row, m_column);
 			puzzle.getColumn(m_column).setNumberExists(m_solution, m_row, m_column);
 			puzzle.getSquare(getSquareIndex()).setNumberExists(m_solution, m_row, m_column);
@@ -47,11 +50,11 @@ public class Block {
 		if (isSolved() && solutionValue != m_solution) {
 			throw new RuleViolationException("The block you are trying to set already has a solution.");
 		}
-		if (!m_possableSolutions.contains(solutionValue)) {
+		if (!m_possibleSolutions.contains(solutionValue)) {
 			throw new InternalSolverException("The solution you are trying to set is not in the collection of possible solutions to this block!");
 		}
 		m_solution = solutionValue;
-		m_possableSolutions.clear();
+		m_possibleSolutions.clear();
 		puzzle.getRow(m_row).setNumberExists(solutionValue, m_row, m_column);
 		puzzle.getColumn(m_column).setNumberExists(solutionValue, m_row, m_column);
 		puzzle.getSquare(getSquareIndex()).setNumberExists(solutionValue, m_row, m_column);
@@ -80,17 +83,17 @@ public class Block {
 				addPossibleSolution(i);
 			}
 		}
-		if (m_possableSolutions.isEmpty()) {
+		if (m_possibleSolutions.isEmpty()) {
 			throw new InternalSolverException("The list of potential solutions is empty!");
 		}
 	}
 
 	protected void addPossibleSolution(int i) {
-		m_possableSolutions.add(i);
+		m_possibleSolutions.add(i);
 	}
 
 	protected void resetPossibleSolutions() {
-		m_possableSolutions.clear();
+		m_possibleSolutions.clear();
 	}
 
 	public int getSolution() {
@@ -102,7 +105,7 @@ public class Block {
 	}
 	
 	public List<Integer> getPossableSolutions() {
-		return m_possableSolutions;
+		return m_possibleSolutions;
 	}
 	
 	public int getRow() {

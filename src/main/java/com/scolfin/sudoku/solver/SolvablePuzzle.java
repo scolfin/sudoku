@@ -11,7 +11,7 @@ class SolvablePuzzle extends Puzzle {
 		super(puzzle);
 	}
 
-	/*
+	/**
 	 * Reduces the puzzle, by finding solutions given the current state of the puzzle.
 	 * Returns true if it successfully moved closer toward a solution.
 	 */
@@ -19,11 +19,11 @@ class SolvablePuzzle extends Puzzle {
 		int newSolutionCounter = 0;
 		newSolutionCounter = resetPossableSolutionsForAll(newSolutionCounter);
 		for (int i = 0; i < 9; ++i) {
-			newSolutionCounter += m_rows[i].findSinglePossableEntries(this);
+			newSolutionCounter += m_rows[i].findSinglePossibleEntries(this);
 			newSolutionCounter = resetPossableSolutionsForAll(newSolutionCounter);
-			newSolutionCounter += m_columns[i].findSinglePossableEntries(this);
+			newSolutionCounter += m_columns[i].findSinglePossibleEntries(this);
 			newSolutionCounter = resetPossableSolutionsForAll(newSolutionCounter);
-			newSolutionCounter += m_squares[i].findSinglePossableEntries(this);
+			newSolutionCounter += m_squares[i].findSinglePossibleEntries(this);
 		}
 		return newSolutionCounter != 0;
 	}

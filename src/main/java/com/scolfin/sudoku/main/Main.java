@@ -13,7 +13,7 @@ import com.scolfin.sudoku.solver.Solver;
 public class Main {
 
 	public static void main(String[] args) {
-		Puzzle solution = null;
+		Puzzle solution;
 		try {
 			if (args.length == 0) {
 				System.out.println("Failure! You must pass the file with the puzzles to solve!");
